@@ -3,100 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ludotek-ws": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": "dist/ludotek-ws",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.sass"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "25kb",
-                  "maximumError": "500kb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "ludotek-ws:build:production"
-            },
-            "development": {
-              "buildTarget": "ludotek-ws:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "ludotek-ws:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "sass",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.sass"
-            ],
-            "scripts": []
-          }
-        }
-      }
-    },
     "book-models": {
       "projectType": "library",
       "root": "projects/book-models",
@@ -220,6 +126,39 @@
               "projects/front-end/src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "tools-routes": {
+      "projectType": "library",
+      "root": "projects/tools-routes",
+      "sourceRoot": "projects/tools-routes/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/tools-routes/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/tools-routes/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/tools-routes/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/tools-routes/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
